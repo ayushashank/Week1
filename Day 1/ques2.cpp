@@ -28,7 +28,7 @@ int swapDigits(int n)
         numOfDigits--;
     }
 
-    // retrieving the number except first and last digit
+    // retrieving the number except first and last digit (middle part)
     int middleNum = n % newNum;
     middleNum /= 10;
 
