@@ -1,6 +1,12 @@
-// Question 3
+/* Question 2
+Write a function that takes in a non-empty array of distinct integers and an integer representing a target sum. The function should find all triplets in the array that sum up to the target sum and return a two-dimensional array of all these triplets. The numbers in each triplet should be ordered in ascending order, and the triplets themselves should be ordered in ascending order with respect to the numbers they hold. If no three numbers sum up to the target sum, the function should return an empty array.
+Ex:
+target_sum = 6
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+result = [[1, 2, 3]]*/
+
 // Time Complexity: O(N*N)
-// Space Complexity: O()
+// Space Complexity: O(logN)
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -63,7 +69,6 @@ vector<vector<int>> findTriplets(vector<int> &nums, int target)
 
     vector<vector<int>> res;
 
-    // Write your own sorting algo
     // sort(nums.begin(), nums.end());
 
     // Using quick sort to sort the array
@@ -124,7 +129,7 @@ int main()
 
     vector<vector<int>> triplets = findTriplets(nums, target);
 
-    // Printing all the triplets that sum up to target
+    // Printing all the triplets that sum up to the target
     if (triplets.size() == 0)
     {
         cout << "There are no triplets whos sum is equal to target" << endl;
