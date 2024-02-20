@@ -24,9 +24,10 @@ void printPattern(int n)
         cout << endl;
     }
 
-    // Printing the middle pattern if n is odd
+    // if n is odd
     if (n & 1 == 1)
     {
+        // printing the middle part
         for (int i = 0; i < n; i++)
         {
             if (i == n / 2)
@@ -35,21 +36,39 @@ void printPattern(int n)
                 cout << "*";
         }
         cout << endl;
+
+        // printing the lower half
+        for (int i = 0; i < n / 2; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (j == (n / 2 - i - 1))
+                    cout << "/";
+                else if (j == (n / 2 + i + 1))
+                    cout << "\\";
+                else
+                    cout << "*";
+            }
+            cout << endl;
+        }
     }
 
-    // printing the lower half
-    for (int i = 0; i < n / 2; i++)
+    // if n is even, printing the lower half
+    else
     {
-        for (int j = 0; j < n; j++)
+        for (int i = 0; i < n / 2; i++)
         {
-            if (j == n / 2 - i - 1)
-                cout << "/";
-            else if (j == n / 2 + i + 1)
-                cout << "\\";
-            else
-                cout << "*";
+            for (int j = 0; j < n; j++)
+            {
+                if (j == (n / 2 - i - 1))
+                    cout << "/";
+                else if (j == (n / 2 + i))
+                    cout << "\\";
+                else
+                    cout << "*";
+            }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 
