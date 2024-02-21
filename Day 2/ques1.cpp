@@ -18,17 +18,23 @@ vector<int> removeDuplicates(vector<int> &values)
     // inserting each number in the map
     for (int i = 0; i < values.size(); i++)
     {
+        if(uniqueVals.find(values[i]) != uniqueVals.end()){
+
+        }
         uniqueVals[values[i]] = true;
+
     }
 
-    // storing the unique values in the array
-    vector<int> result;
-    for (auto val : uniqueVals)
-    {
-        result.push_back(val.first);
-    }
+    // values = {};
 
-    return result;
+    // // storing the unique values in the array
+    // vector<int> result;
+    // for (auto val : uniqueVals)
+    // {
+    //     values.push_back(val.first);
+    // }
+
+    // return values;
 }
 
 int main()
