@@ -11,25 +11,28 @@ n == matrix[i].length
 -104 <= matrix[i][j], target <= 104
 */
 
-// Time Complexity: O(log(M*N))
+// Time Complexity: O(log(M*N)) where M is rows of matrix and N is columns of matrix
 // Space ComplexitY: O(1)
 
 #include <bits/stdc++.h>
 using namespace std;
 
+// MARK:- Finding the target in the matrix
+// DESC:- Using binary search for searching the target
 bool isTargetPresent(vector<vector<int>> &matrix, int rows, int cols, int target)
 {
     // Applying binary search
     int startIndex = 0, endIndex = matrix.size() * matrix[0].size() - 1, mid;
     while (startIndex < endIndex)
     {
+        // [mid/rows] : correct row ; [mid%cols] : correct column in the matrix
         mid = startIndex + (endIndex - startIndex) / 2;
         if (matrix[mid / rows][mid % cols] == target)
             return true;
         else if (matrix[mid / rows][mid % cols] < target)
-            startIndex++;
+            startIndex = mid + 1;
         else
-            endIndex--;
+            endIndex = mid - 1;
     }
 
     return false;

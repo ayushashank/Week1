@@ -9,6 +9,7 @@ You have to rotate the image in place, which means you have to modify the input 
 #include <bits/stdc++.h>
 using namespace std;
 
+// MARK:- Taking transpose of the matrix
 void transposeOfMatrix(vector<vector<int>> &matrix)
 {
     for (int i = 0; i < matrix.size(); i++)
@@ -20,6 +21,9 @@ void transposeOfMatrix(vector<vector<int>> &matrix)
         }
     }
 }
+
+// MARK:- Reversing each row of the matrix
+// DESC:- Using two pointer approach to reverse the row
 void reverseEachRow(vector<vector<int>> &matrix)
 {
     for (int i = 0; i < matrix.size(); i++)
@@ -34,6 +38,7 @@ void reverseEachRow(vector<vector<int>> &matrix)
     }
 }
 
+// MARK:- Printing all the elements of the matrix
 void printMatrix(vector<vector<int>> &matrix)
 {
     for (int i = 0; i < matrix.size(); i++)
