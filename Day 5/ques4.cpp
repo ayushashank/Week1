@@ -11,14 +11,21 @@ Notice that you may not slant the container.
 #include <bits/stdc++.h>
 using namespace std;
 
-int containerWithMostWater(vector<int> &values)
+// MARK:- Function to return maximum water which is can be hold by the container
+// DESC:- Uses two pointer approach to find the maximum area
+int containerWithMostWater(vector<int> &heights)
 {
-    int startIndex = 0, endIndex = values.size() - 1;
+    // Initializing the starting pointer at 0 and ending pointer at the last index
+    int startIndex = 0, endIndex = heights.size() - 1;
     int maxArea = 0;
     while (startIndex < endIndex)
     {
-        maxArea = max(maxArea, (endIndex - startIndex) * min(values[startIndex], values[endIndex]));
-        if (values[startIndex] < values[endIndex])
+        // Calculating the area of the current container and updating the maximum area
+        // (endIndex - startIndex) * min(values[startIndex], values[endIndex]) is the area of the current container
+        maxArea = max(maxArea, (endIndex - startIndex) * min(heights[startIndex], heights[endIndex]));
+
+        // Updating the pointers by changing the pointer which represents smaller height
+        if (heights[startIndex] < heights[endIndex])
             startIndex++;
         else
             endIndex--;
@@ -33,12 +40,21 @@ int main()
     cout << "Enter the size of the array: ";
     cin >> sizeOfArray;
 
-    vector<int> values = {9, 0, 0, 0, 0, 0, 9};
-    for (int i = 0; i < sizeOfArray; i++)
+    vector<int> heights(sizeOfArray);
+    if (sizeOfArray > 0)
     {
-        cin >> values[i];
-    }
+        // Taking the input of all the heights
+        cout << "Enter the heights" << endl;
+        for (int i = 0; i < sizeOfArray; i++)
+        {
+            cin >> heights[i];
+        }
 
-    cout << "The area of container with most water is: " << containerWithMostWater(values);
+        cout << "The area of container with most water is: " << containerWithMostWater(heights);
+    }
+    else
+    {
+        cout << "Invalid array size." << endl;
+    }
     return 0;
 }
