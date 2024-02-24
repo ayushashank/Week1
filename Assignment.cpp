@@ -13,7 +13,7 @@ private:
     int numOfBombs;
     bool gameOver;
     vector<vector<char>> mineSweeperBoard;
-    vector<vector<bool>> revealedCells;
+    // vector<vector<bool>> revealedCells;
 
 public:
     // Constructor to assign all the values
@@ -24,8 +24,8 @@ public:
         gameOver = false;
 
         // Assigning the values to the board
-        mineSweeperBoard.assign(sizeOfBoard, vector<char>(sizeOfBoard, 'S'));
-        revealedCells.assign(sizeOfBoard, vector<bool>(sizeOfBoard, false));
+        mineSweeperBoard.assign(sizeOfBoard, vector<char>(sizeOfBoard, '#'));
+        // revealedCells.assign(sizeOfBoard, vector<bool>(sizeOfBoard, false));
 
         placeBombs();
     }
@@ -61,13 +61,21 @@ public:
         {
             for (int currCol = 0; currCol < sizeOfBoard; currCol++)
             {
-                if (revealedCells[currRow][currCol] == true)
+                // if (revealedCells[currRow][currCol] == true)
+                // {
+                //     cout << mineSweeperBoard[currRow][currCol] << " ";
+                // }
+                // else
+                // {
+                //     cout << "# ";
+                // }
+                if (mineSweeperBoard[currRow][currCol] == 'B')
                 {
-                    cout << mineSweeperBoard[currRow][currCol] << " ";
+                    cout << "# ";
                 }
                 else
                 {
-                    cout << "# ";
+                    cout << mineSweeperBoard[currRow][currCol] << " ";
                 }
             }
             cout << endl;
@@ -79,10 +87,15 @@ public:
     // DESC:- Checking if the cell is within the bounds and has not been visited already
     bool isMoveValid(int row, int col)
     {
-        if (row >= 0 and row < sizeOfBoard and col >= 0 and col < sizeOfBoard and revealedCells[row][col] == false)
+        if (row >= 0 and row < sizeOfBoard and col >= 0 and col < sizeOfBoard and
+            (mineSweeperBoard[row][col] == '#' or mineSweeperBoard[row][col] == 'B'))
+        {
             return true;
+        }
         else
+        {
             return false;
+        }
     }
 
     // MARK:- Method to reveal/display the cell if it is valid and not a bomb
@@ -104,7 +117,9 @@ public:
         else
         {
             // Marking the cell as visited
-            revealedCells[row][col] = true;
+            // revealedCells[row][col] = true;
+
+            mineSweeperBoard[row][col] = 'S';
 
             // Checking if the player has won
             if (checkWin() == true)
@@ -123,7 +138,8 @@ public:
         {
             for (int currCol = 0; currCol < sizeOfBoard; currCol++)
             {
-                if (revealedCells[currRow][currCol] == false and mineSweeperBoard[currRow][currCol] != 'B')
+                // revealedCells[currRow][currCol] == false
+                if (mineSweeperBoard[currRow][currCol] == '#' and mineSweeperBoard[currRow][currCol] != 'B')
                 {
                     return false;
                 }
@@ -150,7 +166,15 @@ public:
         {
             for (int currCol = 0; currCol < sizeOfBoard; currCol++)
             {
-                cout << mineSweeperBoard[currRow][currCol] << " ";
+                if (mineSweeperBoard[currRow][currCol] == '#')
+                {
+                    cout << "S ";
+                }
+
+                else
+                {
+                    cout << mineSweeperBoard[currRow][currCol] << " ";
+                }
             }
             cout << endl;
         }
@@ -183,8 +207,8 @@ int main()
             MineSweeperGame game(stoi(boardSize)); // Making an object
 
             // To check the positions of bomb
-            // cout << "\nThe complete board is shown below (S - Safe Positions     B - Bomb Positions)" << endl;
-            // game.displayCompleteMineSweeperBoard();
+            cout << "\nThe complete board is shown below (S - Safe Positions     B - Bomb Positions)" << endl;
+            game.displayCompleteMineSweeperBoard();
 
             // Executing the game until a bomb is encountered or the game is completed
             while (game.isGameOver() == false)
