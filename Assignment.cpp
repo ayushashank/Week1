@@ -13,7 +13,6 @@ private:
     int numOfBombs;
     bool gameOver;
     vector<vector<char>> mineSweeperBoard;
-    // vector<vector<bool>> revealedCells;
 
 public:
     // Constructor to assign all the values
@@ -25,7 +24,6 @@ public:
 
         // Assigning the values to the board
         mineSweeperBoard.assign(sizeOfBoard, vector<char>(sizeOfBoard, '#'));
-        // revealedCells.assign(sizeOfBoard, vector<bool>(sizeOfBoard, false));
 
         placeBombs();
     }
@@ -61,14 +59,6 @@ public:
         {
             for (int currCol = 0; currCol < sizeOfBoard; currCol++)
             {
-                // if (revealedCells[currRow][currCol] == true)
-                // {
-                //     cout << mineSweeperBoard[currRow][currCol] << " ";
-                // }
-                // else
-                // {
-                //     cout << "# ";
-                // }
                 if (mineSweeperBoard[currRow][currCol] == 'B')
                 {
                     cout << "# ";
@@ -116,9 +106,6 @@ public:
         }
         else
         {
-            // Marking the cell as visited
-            // revealedCells[row][col] = true;
-
             mineSweeperBoard[row][col] = 'S';
 
             // Checking if the player has won
@@ -195,51 +182,64 @@ bool isValidNumber(string &str)
 
 int main()
 {
-    string boardSize;
-    cout << "Enter size of the Minesweeper board (n * n): ";
-    cin >> boardSize;
-
-    // If the input is a number then only executing the game
-    if (isValidNumber(boardSize))
+    // Variable to store the choice of the user
+    char wantToPlayAgain = 'Y';
+    while (wantToPlayAgain != 'N' and wantToPlayAgain != 'n')
     {
-        if (stoi(boardSize) > 1 and stoi(boardSize) <= 10) // Limiting the size of the board
+        string boardSize;
+        cout << "Enter size of the Minesweeper board (n * n): ";
+        cin >> boardSize;
+
+        // If the input is a number then only executing the game
+        if (isValidNumber(boardSize))
         {
-            MineSweeperGame game(stoi(boardSize)); // Making an object
-
-            // To check the positions of bomb
-            cout << "\nThe complete board is shown below (S - Safe Positions     B - Bomb Positions)" << endl;
-            game.displayCompleteMineSweeperBoard();
-
-            // Executing the game until a bomb is encountered or the game is completed
-            while (game.isGameOver() == false)
+            if (stoi(boardSize) > 1 and stoi(boardSize) <= 10) // Limiting the size of the board
             {
-                game.displayMineSweeperBoard();
-                string row, col;
-                cout << "Enter the row and column of the cell you want to reveal: ";
-                cin >> row >> col;
+                MineSweeperGame game(stoi(boardSize)); // Making an object
 
-                if (isValidNumber(row) and isValidNumber(col))
+                // To check the positions of bomb
+                cout << "\nThe complete board is shown below (S - Safe Positions     B - Bomb Positions)" << endl;
+                game.displayCompleteMineSweeperBoard();
+
+                // Executing the game until a bomb is encountered or the game is completed
+                while (game.isGameOver() == false)
                 {
-                    game.revealCell(stoi(row), stoi(col));
+                    game.displayMineSweeperBoard();
+                    string row, col;
+                    cout << "Enter the row and column of the cell you want to reveal (0 -> n-1, 0 -> n-1): ";
+                    cin >> row >> col;
+
+                    if (isValidNumber(row) and isValidNumber(col))
+                    {
+                        game.revealCell(stoi(row), stoi(col));
+                    }
+                    else
+                    {
+                        cout << "Invalid input! Please enter correct values!" << endl;
+                    }
                 }
-                else
-                {
-                    cout << "Invalid input! Please enter correct values!" << endl;
-                }
+
+                // Displaying the complete board after the game ends
+                cout << "\nThe complete board is shown below (S - Safe Positions   B - Bomb Positions)" << endl;
+                game.displayCompleteMineSweeperBoard();
             }
-
-            // Displaying the complete board after the game ends
-            cout << "\nThe complete board is shown below (S - Safe Positions   B - Bomb Positions)" << endl;
-            game.displayCompleteMineSweeperBoard();
+            else
+            {
+                cout << "Invalid size! Please restart the game!" << endl;
+            }
         }
         else
         {
-            cout << "Invalid size! Please restart the game!" << endl;
+            cout << "Invalid input! Please restart the game!" << endl;
         }
-    }
-    else
-    {
-        cout << "Invalid input! Please restart the game!" << endl;
+
+        cout << "Enter 'N' or 'n to exit.";
+        cin >> wantToPlayAgain;
+
+        // Asking user if he wants to exit the game or not
+        // The game will stop if the user enters 'N' or 'n'
+        if (wantToPlayAgain == 'N' || wantToPlayAgain == 'n')
+            break;
     }
 
     return 0;
